@@ -1,6 +1,12 @@
 # Session 1 — Text to JSON
 
+```
+conda create --prefix ./myenv python=3.14
+conda activate ./my_env
+ ```
+
 From this folder, with the virtual environment active:
+
 
 ```bash
 python demo_steps/01_values_and_types.py

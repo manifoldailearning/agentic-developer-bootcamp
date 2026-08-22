@@ -1,10 +1,30 @@
-customer = "Asha Menon"
-attempts = 3
-is_urgent = True
+customer = "Asha Menon" # string can be single or double quotes
+attempts = 3 # integer
+is_urgent = True # boolean
+price = 12.25 # float
 
 print(customer, type(customer))
 print(attempts, type(attempts))
 print(is_urgent, type(is_urgent))
+print(price, type(price))
 
-summary = f"{customer} has tried {attempts} times. Urgent: {is_urgent}"
+# String formatting - Comments ignored by Python
+summary = f"{customer} has tried {attempts} times. Urgent: {is_urgent}. Price: {price}"
 print(summary)
+
+# string in multiple lines
+"""Assignment 1:
+create a variable like this:
+word1 : twinkle
+word2 : star
+
+Create a Rhyme like this (using string formatting):
+ twinkle twinkle little star
+ how i wonder what you are
+ up above the world so high
+ like a diamond in the sky
+ twinkle twinkle little star
+ how i wonder what you are
+"""
+
+
