@@ -27,4 +27,29 @@ Create a Rhyme like this (using string formatting):
  how i wonder what you are
 """
 
+word1 = "twinkle"
+word2 = "star"
+rhyme = f"{word1} {word1} little {word2} how i wonder what you are, up above the world so high ,like a diamond in the sky, {word1} {word1} little {word2} how i wonder what you are"
+print(rhyme)
 
+solution_approach_2 = f"""
+ {word1} {word1} little {word2} how i wonder what you are, 
+ up above the world so high ,like a diamond in the sky,
+ {word1} {word1}little {word2} how i wonder what you are
+"""
+
+print(solution_approach_2)
+
+import keyword
+print("Keywords in Python:")
+print(keyword.kwlist)
+
+True = 10
+
+""" Notes:
+Variables:
+- Variables are case sensitive, cannot be keywords
+- Should not start with a number
+- can start with letter or underscore
+- should not contain spaces or special characters
+"""
