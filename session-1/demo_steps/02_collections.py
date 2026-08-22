@@ -63,6 +63,18 @@ apple: 100, banana: 200, cherry: 300, date: 400
 Access the value of apple from the dictionary
 """
 
+#  numpy package - used for numerical calculations
 
-# for tag in ticket["tags"]:
-#     print(f"- {tag}")
+# for loop
+# Syntax: 
+# for item in collection:
+#     body
+
+print("--------------------------------")
+for i in tags: # collection can be list, tuple, dictionary, set
+    # collection acts as as iterator
+    print(f"{i} - hello")
+
+print("--------------------------------")
+for k,v in ticket.items():
+    print(f"Key - {k}, Value - {v}")
