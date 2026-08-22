@@ -25,7 +25,9 @@ ticket = {
 }
 print(f"Ticket: {ticket}")
 print(f"Data type of ticket: {type(ticket)}")
-
+ticket ["customer_segment"] = "premium"
+ticket ["priority"] = "low"
+print(f"Ticket after updating: {ticket}")
 # access all the keys in the dictionary
 print(f"Keys in the dictionary: {ticket.keys()}")
 #access all the values in the dictionary
@@ -78,3 +80,19 @@ for i in tags: # collection can be list, tuple, dictionary, set
 print("--------------------------------")
 for k,v in ticket.items():
     print(f"Key - {k}, Value - {v}")
+
+# List Comprehension
+# Syntax:
+# [expression for item in collection]
+# [expression for item in collection if condition]
+
+l1 = [1,2,3,4,5,6,7,8,9,10]
+
+result = []
+for i in l1:
+    result.append(i*10)
+
+print(f"Result: {result}")
+
+result = [i*10 for i in l1]
+print(f"Result of list comprehension: {result}")
