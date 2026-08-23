@@ -62,5 +62,9 @@ print(f"List 2 after append: {l2}")
 # print(keyword.kwlist)
 
 #result =normalise_priority("HIGH")
-result =normalise_priority("hello")
-print(f"Result: {result}")
+# result =normalise_priority("hello")
+# print(f"Result: {result}")
+
+key, value = parse_line("Customer: Asha Menon")
+print(f"Key: {key}")
+print(f"Value: {value}")

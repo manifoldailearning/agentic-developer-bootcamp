@@ -1,15 +1,66 @@
 import json
 from pathlib import Path
+from functions_and_flow import parse_line
 
+# __file__ is the current file path
+print("__file__:")
+print(__file__)
+print(type(__file__))
+print("--------------------------------")
+
+# create file path
+file_path = Path(__file__)
+print("file_path:")
+print(file_path)
+print(type(file_path))
+print("--------------------------------")
+
+# get parent directory
+parent_dir = file_path.parent
+print("parent_dir:")
+print(parent_dir)
+print(type(parent_dir))
+print("--------------------------------")
+
+file_name = "support-ticket-v1.txt"
+full_file_name = parent_dir / file_name
+print("full_file_name:")
+print(full_file_name)
+print(type(full_file_name))
+# Read the file
+output = full_file_name.read_text(encoding="utf-8")
+print("output:")
+print(output)
+print(type(output))
+print("--------------------------------")
+
+# get grandparent directory
 root = Path(__file__).resolve().parents[1]
+print("grand parent directory:")
+print(root)
+print(type(root))
+print("--------------------------------")
 input_path = root / "data" / "support-ticket.txt"
 output_path = root / "output" / "step-04-ticket.json"
 
 text = input_path.read_text(encoding="utf-8")
-lines = [line for line in text.splitlines() if line.strip()]
+# \n is a newline character
+split_lines = text.split("\n")
+print("split_lines:")
+print(split_lines)
+print(type(split_lines))
+print("--------------------------------")
 
-ticket = {"line_count": len(lines), "first_line": lines[0]}
-output_path.parent.mkdir(parents=True, exist_ok=True)
-output_path.write_text(json.dumps(ticket, indent=2), encoding="utf-8")
+# Assigment:
+# Use the parse_line function to parse the lines by iterating over the split_lines
+# Hint: Use for loop and the parse_line function
 
-print(f"Created: {output_path}")
+
+
+#lines = [line for line in text.splitlines() if line.strip()]
+
+# ticket = {"line_count": len(lines), "first_line": lines[0]}
+# output_path.parent.mkdir(parents=True, exist_ok=True)
+# output_path.write_text(json.dumps(ticket, indent=2), encoding="utf-8")
+
+# print(f"Created: {output_path}")
