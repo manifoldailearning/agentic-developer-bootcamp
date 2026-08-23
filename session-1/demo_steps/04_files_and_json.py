@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from functions_and_flow import parse_line
+from functions_and_flow import parse_line, normalise_priority
 
 # __file__ is the current file path
 print("__file__:")
@@ -55,8 +55,18 @@ print("--------------------------------")
 # Use the parse_line function to parse the lines by iterating over the split_lines
 # Hint: Use for loop and the parse_line function
 
+output_dict = {}
+for line in split_lines:
+    k,v = parse_line(line)
+    output_dict[k] = v
+    print(f"k: {k}, v: {v}")
 
-
+print(output_dict)
+print("--------------------------------")
+#normalise the priority
+output_dict["priority"] = normalise_priority(output_dict["priority"])
+print(output_dict)
+print("--------------------------------")
 #lines = [line for line in text.splitlines() if line.strip()]
 
 # ticket = {"line_count": len(lines), "first_line": lines[0]}

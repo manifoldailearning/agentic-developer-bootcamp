@@ -1,4 +1,4 @@
 Customer: Asha Menon
 Issue: Unable to sign in after resetting the password
-Priority: high
+Priority: HIGH
 Tags: authentication, password-reset, urgent
