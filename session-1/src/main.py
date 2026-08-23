@@ -5,7 +5,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 INPUT_PATH = PROJECT_ROOT / "data" / "support-ticket.txt"
 OUTPUT_PATH = PROJECT_ROOT / "output" / "ticket.json"
 ALLOWED_PRIORITIES = {"low", "medium", "high"}
-
+# changes
 
 def parse_ticket(text: str) -> dict:
     ticket = {
