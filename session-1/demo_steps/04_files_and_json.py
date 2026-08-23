@@ -67,10 +67,17 @@ print("--------------------------------")
 output_dict["priority"] = normalise_priority(output_dict["priority"])
 print(output_dict)
 print("--------------------------------")
-#lines = [line for line in text.splitlines() if line.strip()]
 
-# ticket = {"line_count": len(lines), "first_line": lines[0]}
-# output_path.parent.mkdir(parents=True, exist_ok=True)
-# output_path.write_text(json.dumps(ticket, indent=2), encoding="utf-8")
+# Fix the tags
+output_dict["tags"] = output_dict["tags"].split(",")
+print(output_dict)
+print("--------------------------------")
 
-# print(f"Created: {output_path}")
+json_output = json.dumps(output_dict, indent=2)
+print(json_output)
+print(type(json_output))
+print("--------------------------------")
+
+output_path.parent.mkdir(parents=True, exist_ok=True) # create the output directory if it doesn't exist
+output_path.write_text(json_output, encoding="utf-8") # write the json output to the file
+print(f"Created: {output_path}")
