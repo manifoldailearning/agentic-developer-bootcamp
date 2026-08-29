@@ -2,7 +2,9 @@
 
 ```
 conda create --prefix ./myenv python=3.14
-conda activate ./my_env
+conda activate ./myenv
+
+pip install -r requirements.txt
  ```
 
 From this folder, with the virtual environment active:
