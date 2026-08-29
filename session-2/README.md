@@ -30,7 +30,7 @@ This README contains basic Git commands and configurations for reference.
 Example:
 ```bash
 git config --global user.name "nachiketh"
-git config --global user.email "murthy@manifoldailearning.in"
+git config --global user.email "nachiketh@manifoldailearning.in"
 ```
 
 ## Local Repository Operations
