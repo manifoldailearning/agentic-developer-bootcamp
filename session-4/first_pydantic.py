@@ -1,20 +1,11 @@
 from pydantic import BaseModel, ValidationError
 
 class AgentRequest(BaseModel): # this is a class that inherits from BaseModel
-    task: str
-    max_steps: int
-    temperature: float
+    task: str # required field
+    max_steps: int # required field
+    temperature: float # required field
 
 
-request = AgentRequest(task="Solve the problem", max_steps=10, temperature=0.5)
-print(request)
-print(type(request))
-print(type(request.task))
-print(type(request.max_steps))
-print(type(request.temperature))
-
-print("--------------------------------")
-# Parsing / Coercion
 request_2 = AgentRequest(task="Solve the problem", max_steps="10", temperature="0.5")
 print(request_2)
 print(type(request_2))
