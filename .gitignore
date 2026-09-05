@@ -1,4 +1,6 @@
 myenv/
 /myenv
 .env
+.env.*
+!.env.example
 __pycache__/
