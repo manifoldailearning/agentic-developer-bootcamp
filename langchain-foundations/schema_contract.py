@@ -22,6 +22,9 @@ class IncidentAssessment(BaseModel):
     needs_human_review: bool = Field(default=False, description="Whether the incident needs human review")
 
 print(json.dumps(IncidentAssessment.model_json_schema(), indent=2))
+
+
+
 print("--------------------------------")
 
 SYSTEM_PROMPT = """You support the incident commander for a commerce platform.

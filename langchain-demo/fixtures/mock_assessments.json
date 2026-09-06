@@ -1,0 +1,96 @@
+{
+  "payments-502": {
+    "schema_version": "1.0",
+    "incident_id": "INC-4821",
+    "summary": "Checkout failures increased after a payments release, with reports of possible duplicate charges.",
+    "category": "payments",
+    "severity": "P1",
+    "affected_services": ["checkout", "payments"],
+    "business_impact": "Customers in Bengaluru may be unable to pay and some may have retried charges.",
+    "evidence": [
+      {"claim": "Payment failures reached 18 percent", "source_quote": "Payment failures reached 18 percent for ten minutes."},
+      {"claim": "Duplicate charges remain unconfirmed", "source_quote": "Two merchants report possible duplicate charges."}
+    ],
+    "missing_information": ["Number of customers affected", "Whether duplicate charges actually completed"],
+    "recommended_team": "payments-on-call",
+    "recommended_next_action": "Keep the rollout paused and ask the payments on-call engineer to verify charge idempotency and affected transactions.",
+    "confidence": 0.88,
+    "needs_human_review": true
+  },
+  "inventory-delay": {
+    "schema_version": "1.0",
+    "incident_id": "INC-4822",
+    "summary": "Inventory updates in Pune are eleven minutes behind while ordering remains available.",
+    "category": "inventory",
+    "severity": "P2",
+    "affected_services": ["inventory-sync"],
+    "business_impact": "Warehouse staff see stale stock counts and may make decisions using delayed data.",
+    "evidence": [{"claim": "Orders still complete", "source_quote": "Orders still complete."}],
+    "missing_information": ["Number of stock records delayed"],
+    "recommended_team": "fulfilment-platform",
+    "recommended_next_action": "Check inventory queue depth and compare the latest warehouse update timestamp.",
+    "confidence": 0.84,
+    "needs_human_review": false
+  },
+  "login-global": {
+    "schema_version": "1.0",
+    "incident_id": "INC-4823",
+    "summary": "Login attempts fail across all regions with HTTP 500 responses.",
+    "category": "authentication",
+    "severity": "P0",
+    "affected_services": ["authentication"],
+    "business_impact": "Users cannot sign in across all regions.",
+    "evidence": [{"claim": "All regions are affected", "source_quote": "Login attempts fail for all regions with HTTP 500."}],
+    "missing_information": ["Root cause", "Number of affected users"],
+    "recommended_team": "identity-on-call",
+    "recommended_next_action": "Page the identity on-call engineer and verify the last authentication deployment.",
+    "confidence": 0.93,
+    "needs_human_review": true
+  },
+  "coupon-question": {
+    "schema_version": "1.0",
+    "incident_id": "INC-4824",
+    "summary": "A merchant requested a one-day coupon extension without reporting a service problem.",
+    "category": "other",
+    "severity": "P3",
+    "affected_services": [],
+    "business_impact": "No current service impact is reported.",
+    "evidence": [{"claim": "No degradation is reported", "source_quote": "No service degradation or customer impact is reported."}],
+    "missing_information": [],
+    "recommended_team": "operations",
+    "recommended_next_action": "Route the request to the promotions owner as a normal business request.",
+    "confidence": 0.96,
+    "needs_human_review": false
+  },
+  "pii-leak": {
+    "schema_version": "1.0",
+    "incident_id": "INC-4825",
+    "summary": "A customer received another customer's invoice and the exposure scope is unknown.",
+    "category": "security-privacy",
+    "severity": "P1",
+    "affected_services": ["invoice-download"],
+    "business_impact": "Customer information may have been disclosed to the wrong person.",
+    "evidence": [{"claim": "An invoice went to the wrong customer", "source_quote": "one customer received another customer's invoice PDF"}],
+    "missing_information": ["Total number of mismatched invoices", "Data fields exposed"],
+    "recommended_team": "security-incident-response",
+    "recommended_next_action": "Escalate to security and privacy responders while preserving relevant delivery logs.",
+    "confidence": 0.9,
+    "needs_human_review": true
+  },
+  "empty-detail": {
+    "schema_version": "1.0",
+    "incident_id": null,
+    "summary": "The report states that production is broken but gives no affected service or observable symptom.",
+    "category": "other",
+    "severity": "P3",
+    "affected_services": [],
+    "business_impact": "Impact cannot be determined from the report.",
+    "evidence": [{"claim": "The report lacks a specific symptom", "source_quote": "Something is broken in production."}],
+    "missing_information": ["Affected service", "Observed error", "Scope and duration"],
+    "recommended_team": "operations",
+    "recommended_next_action": "Ask the reporter for the affected service, error, scope, and start time.",
+    "confidence": 0.42,
+    "needs_human_review": true
+  }
+}
+

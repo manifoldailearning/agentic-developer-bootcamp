@@ -1,0 +1,47 @@
+diff --git a/src/incident_copilot/service.py b/src/incident_copilot/service.py
+--- a/src/incident_copilot/service.py
++++ b/src/incident_copilot/service.py
+@@ -2,7 +2,7 @@ from dataclasses import dataclass
+ from datetime import UTC, datetime
+ from uuid import uuid4
+ 
+-from .domain import Category, IncidentAssessment, Severity
++from .domain import Category, IncidentAssessment, Severity, Team
+ from .providers import IncidentModel
+ 
+ 
+@@ -32,5 +32,9 @@ def enforce_review_policy(assessment: IncidentAssessment) -> tuple[IncidentAsses
+         reasons.append("material_information_missing")
+     if assessment.category == Category.SECURITY_PRIVACY:
+         reasons.append("security_or_privacy")
++        if assessment.recommended_team != Team.SECURITY:
++            assessment = assessment.model_copy(
++                update={"recommended_team": Team.SECURITY, "needs_human_review": True}
++            )
+ 
+     if reasons and not assessment.needs_human_review:
+diff --git a/tests/test_service.py b/tests/test_service.py
+--- a/tests/test_service.py
++++ b/tests/test_service.py
+@@ -34,7 +34,21 @@ class ServiceTests(unittest.TestCase):
+     def test_normal_p2_can_remain_unreviewed(self):
+         assessment = IncidentAssessment.model_validate(VALID)
+         hardened, reasons = enforce_review_policy(assessment)
+         self.assertFalse(hardened.needs_human_review)
+         self.assertEqual(reasons, ())
+ 
++    def test_security_incident_routes_to_security_team(self):
++        assessment = IncidentAssessment.model_validate(
++            {
++                **VALID,
++                "category": "security-privacy",
++                "recommended_team": "operations",
++                "needs_human_review": False,
++            }
++        )
++        hardened, reasons = enforce_review_policy(assessment)
++        self.assertEqual(hardened.recommended_team.value, "security-incident-response")
++        self.assertTrue(hardened.needs_human_review)
++        self.assertIn("security_or_privacy", reasons)
++
+     def test_service_rejects_empty_report(self):
