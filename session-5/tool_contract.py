@@ -31,6 +31,7 @@ print("--------------------------------")
 # 2. Model will never execute the tool directly
 print(output.tool_calls)
 print("--------------------------------")
+# Have a hard limit
 for call in output.tool_calls:
     print(f"Tool name: {call['name']}")
     print(f"Tool arguments: {call['args']}")
@@ -41,3 +42,5 @@ for call in output.tool_calls:
 messages.append(ToolMessage(content=tool_result, tool_call_id=call['id']))
 output = model.invoke(messages)
 print(output)
+
+# Langgraph
