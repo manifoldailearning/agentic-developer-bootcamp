@@ -16,7 +16,10 @@ llm = ChatOpenAI(model="gpt-5.4-mini")
 def call_llm(input: State):
     output = llm.invoke(input["messages"])
     count = input.get("counter", 0) + 1
-    return {"output": output, "counter": count}
+    # bad practice
+    # input["counter"] = count #  not a good practice to mutate the input
+    # input["output"] = output #  not a good practice to mutate the input
+    return {"output": output, "counter": count} # good practice to return a new state
 
 builder = StateGraph(State)
 builder.add_node("call_llm", call_llm)
@@ -29,5 +32,6 @@ builder.add_edge("call_llm", END)
 graph = builder.compile()
 
 # run the graph
-output = graph.invoke({"messages": [HumanMessage(content="What is the capital of France?")]})
+output = graph.invoke({"messages": [HumanMessage(content="What is the capital of France?")],
+"counter": 0})
 print(output)
