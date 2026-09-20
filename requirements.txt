@@ -3,3 +3,4 @@ langchain-openai
 pydantic
 python-dotenv
 langgraph
+langgraph-checkpoint-sqlite
