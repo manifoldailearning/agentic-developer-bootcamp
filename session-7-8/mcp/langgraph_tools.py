@@ -16,24 +16,39 @@ from langgraph.graph import START, END, StateGraph
 import sqlite3
 import uuid
 from langchain_mcp_adapters.client import MultiServerMCPClient
+import asyncio
+import sys
+from pathlib import Path
 load_dotenv()
 
+# Creating MultiServerMCPClient is sync. Fetching tools is async.
+FAST_MCP_PATH = str(Path(__file__).resolve().parent / "fast_mcp.py")
 mcp_client = MultiServerMCPClient({
+    # stdio requires a command + args that spawn the server process
     "fast_mcp": {
         "transport": "stdio",
-        "url": "http://localhost:8000/mcp",
+        "command": sys.executable,
+        "args": [FAST_MCP_PATH],
     },
+    # HTTP servers use transport="http" (not type="http")
     "docs-langchain": {
-      "type": "http",
-      "url": "https://docs.langchain.com/mcp"
+        "transport": "http",
+        "url": "https://docs.langchain.com/mcp",
     },
-}
-    
-)
+})
 
-TOOLS = mcp_client.get_tools() # get the tools from the MCP servers
+async def load_mcp_tools():
+    return await mcp_client.get_tools()
 
-model = ChatOpenAI(model="gpt-5.4-mini").bind_tools(TOOLS) # bind both the tools
+# create custom tool for perform_search
+# @tool
+# def perform_search(query: str) -> str:
+#     """Perform a search on the web."""
+#     return mcp_client.perform_search(query)
+
+TOOLS = asyncio.run(load_mcp_tools())
+print(f"Tools: {TOOLS}")
+model = ChatOpenAI(model="gpt-5.4-mini").bind_tools(TOOLS)
 
 class State(TypedDict):
     messages: Annotated[list[BaseMessage], add_messages]
